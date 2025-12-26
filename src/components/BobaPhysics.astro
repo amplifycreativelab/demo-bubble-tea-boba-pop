@@ -1,0 +1,56 @@
+---
+interface Props {
+    count?: number;
+    class?: string;
+}
+
+const { count = 10, class: className } = Astro.props;
+---
+
+<div
+    class:list={[
+        "absolute inset-0 pointer-events-none overflow-hidden",
+        className,
+    ]}
+>
+    {
+        Array.from({ length: count }).map((_, i) => (
+            <div
+                class="boba-pearl absolute w-6 h-6 bg-ink rounded-full"
+                style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    "--delay": `${Math.random() * 5}s`,
+                    "--duration": `${3 + Math.random() * 4}s`,
+                    "--tx": `${(Math.random() - 0.5) * 100}px`,
+                    "--ty": `${(Math.random() - 0.5) * 100}px`,
+                    opacity: 0.1 + Math.random() * 0.2,
+                }}
+            />
+        ))
+    }
+</div>
+
+<style>
+    .boba-pearl {
+        animation: float var(--duration) infinite ease-in-out;
+        animation-delay: var(--delay);
+        will-change: transform;
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translate(0, 0);
+        }
+        50% {
+            transform: translate(var(--tx), var(--ty));
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .boba-pearl {
+            animation: none;
+        }
+    }
+</style>

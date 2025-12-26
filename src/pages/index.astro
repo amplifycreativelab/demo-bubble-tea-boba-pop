@@ -1,0 +1,196 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import StickerButton from "../components/StickerButton.astro";
+import StickerCard from "../components/StickerCard.astro";
+import HeroCup from "../components/HeroCup.astro";
+import BobaPhysics from "../components/BobaPhysics.astro";
+import DrinkBuilderIsland from "../components/islands/DrinkBuilderIsland";
+import { reviews } from "../data/reviews";
+import { Star } from "lucide-preact";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<MainLayout title="Home">
+	<Header />
+
+	<main>
+		<!-- Hero Section -->
+		<section
+			class="relative min-h-[90vh] flex items-center pt-20 overflow-hidden"
+		>
+			<BobaPhysics count={20} />
+
+			<div
+				class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 w-full"
+			>
+				<div class="space-y-8 text-center lg:text-left">
+					<div
+						class="inline-block bg-accent border-3 border-ink px-4 py-1 rounded-full font-heading text-xl -rotate-2 shadow-hard-sm"
+					>
+						PERTH'S LOUDEST BOBA
+					</div>
+					<h1
+						class="text-7xl md:text-9xl leading-[0.85] text-stroke-ink"
+					>
+						POP.<br />
+						<span class="text-primary">SHAKE.</span><br />
+						SIP.
+					</h1>
+					<p
+						class="font-body text-xl md:text-2xl max-w-lg mx-auto lg:mx-0 opacity-80 leading-relaxed"
+					>
+						Forget boring tea. We're serving up high-voltage
+						flavors, sticker-popping vibes, and the best pearls in
+						WA.
+					</p>
+					<div
+						class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4"
+					>
+						<StickerButton
+							href={`${baseUrl}order`}
+							variant="primary"
+							class="text-2xl px-10 py-5"
+						>
+							ORDER NOW
+						</StickerButton>
+						<StickerButton
+							href={`${baseUrl}menu`}
+							variant="secondary"
+							class="text-2xl px-10 py-5"
+						>
+							VIEW MENU
+						</StickerButton>
+					</div>
+				</div>
+
+				<div class="relative">
+					<HeroCup />
+				</div>
+			</div>
+
+			<!-- Scroll Prompt -->
+			<div
+				class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-40"
+			>
+				<span class="font-heading text-sm">FILL THE CUP</span>
+				<div class="w-0.5 h-10 bg-ink"></div>
+			</div>
+		</section>
+
+		<!-- Social Proof (Reviews) -->
+		<section
+			class="py-32 bg-secondary/10 border-y-3 border-ink relative overflow-hidden"
+		>
+			<div class="max-w-7xl mx-auto px-4">
+				<div class="text-center mb-16 space-y-4">
+					<h2 class="text-6xl md:text-7xl">
+						REAL REVIEWS. <span class="text-primary"
+							>REAL POP!</span>
+					</h2>
+					<p class="font-body text-lg opacity-60 max-w-xl mx-auto">
+						Don't just take our word for it. Hear from our
+						boba-obsessed community across Perth.
+					</p>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					{
+						reviews.map((review, idx) => (
+							<StickerCard rotate={idx % 2 === 0}>
+								<div class="flex items-center gap-4 mb-6">
+									<img
+										src={review.avatar}
+										alt={review.author}
+										class="w-16 h-16 rounded-full border-3 border-ink shadow-hard-sm bg-white"
+									/>
+									<div>
+										<h4 class="font-heading text-2xl leading-none">
+											{review.author}
+										</h4>
+										<div class="flex text-accent mt-1">
+											{Array.from({
+												length: review.rating,
+											}).map(() => (
+												<Star
+													size={16}
+													fill="currentColor"
+												/>
+											))}
+										</div>
+									</div>
+								</div>
+								<p class="font-body text-lg italic leading-relaxed">
+									"{review.quote}"
+								</p>
+							</StickerCard>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- Interactive Mix Section -->
+		<section class="py-32 bg-white relative">
+			<div class="max-w-7xl mx-auto px-4">
+				<div
+					class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-20"
+				>
+					<div class="space-y-6">
+						<div
+							class="inline-block bg-secondary border-3 border-ink px-4 py-1 rounded-full font-heading text-xl rotate-1 shadow-hard-sm"
+						>
+							HAND-SHAKEN
+						</div>
+						<h2 class="text-6xl md:text-8xl leading-[0.85]">
+							BUILD YOUR<br />
+							<span class="text-accent">PERFECT POP!</span>
+						</h2>
+						<p class="font-body text-xl opacity-80 leading-relaxed">
+							Customize your sugar, ice, and toppings. We make it
+							exactly how you like it. No judgment, just pure boba
+							bliss.
+						</p>
+					</div>
+					<div>
+						<DrinkBuilderIsland client:visible />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTAs / Featured -->
+		<section class="py-32 bg-accent border-t-3 border-ink">
+			<div class="max-w-7xl mx-auto px-4 text-center">
+				<div class="space-y-12">
+					<h2
+						class="text-7xl md:text-9xl text-stroke-ink leading-tight"
+					>
+						READY TO <br />
+						<span class="text-primary">GET POPPIN?</span>
+					</h2>
+					<div class="flex flex-wrap justify-center gap-6">
+						<StickerButton
+							href={`${baseUrl}locations`}
+							variant="ink"
+							class="text-3xl px-12 py-6"
+						>
+							FIND NEAREST STORE
+						</StickerButton>
+						<StickerButton
+							href={`${baseUrl}contact`}
+							variant="secondary"
+							class="text-3xl px-12 py-6"
+						>
+							CATERING ENQUIRY
+						</StickerButton>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</MainLayout>

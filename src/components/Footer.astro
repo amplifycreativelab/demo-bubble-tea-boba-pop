@@ -1,0 +1,104 @@
+---
+const baseUrl = import.meta.env.BASE_URL;
+
+const suburbs = [
+    "Subiaco",
+    "Northbridge",
+    "Victoria Park",
+    "Mount Lawley",
+    "Fremantle",
+    "Scarborough",
+];
+---
+
+<footer class="bg-ink text-white pt-20 pb-10 px-4 mt-auto">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+            <!-- Brand -->
+            <div class="space-y-6">
+                <a href={baseUrl} class="flex items-center gap-2">
+                    <div
+                        class="w-10 h-10 bg-primary border-3 border-white rounded-full flex items-center justify-center font-heading text-2xl text-ink"
+                    >
+                        B
+                    </div>
+                    <span
+                        class="font-heading text-3xl tracking-tighter text-white"
+                        >BOBA POP!</span
+                    >
+                </a>
+                <p class="font-body opacity-80">
+                    Perth's loudest boba experience. Hand-shaken,
+                    sticker-coated, and 100% addictive.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="space-y-6">
+                <h4 class="font-heading text-2xl text-secondary">EXPLORE</h4>
+                <ul class="space-y-3 font-body">
+                    <li>
+                        <a
+                            href={`${baseUrl}menu`}
+                            class="hover:text-primary transition-colors"
+                            >Full Menu</a>
+                    </li>
+                    <li>
+                        <a
+                            href={`${baseUrl}specials`}
+                            class="hover:text-primary transition-colors"
+                            >Limited Drops</a>
+                    </li>
+                    <li>
+                        <a
+                            href={`${baseUrl}locations`}
+                            class="hover:text-primary transition-colors"
+                            >Find a Store</a>
+                    </li>
+                    <li>
+                        <a
+                            href={`${baseUrl}contact`}
+                            class="hover:text-primary transition-colors"
+                            >Catering</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Cravings Map -->
+            <div class="space-y-6 md:col-span-2">
+                <h4 class="font-heading text-2xl text-accent uppercase">
+                    Cravings Map (Perth)
+                </h4>
+                <p class="font-body opacity-80 mb-4">
+                    Popping up in your favorite suburbs:
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    {
+                        suburbs.map((suburb) => (
+                            <span class="bg-white/10 border border-white/20 px-3 py-1 rounded-full text-sm font-body hover:bg-primary hover:text-ink transition-colors cursor-default">
+                                {suburb}
+                            </span>
+                        ))
+                    }
+                </div>
+                <div class="pt-6 font-body text-sm opacity-60">
+                    <p>NAP: 123 Rokeby Rd, Subiaco WA 6008 | 08 9234 5678</p>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="pt-10 border-t border-white/10 flex flex-col md:row items-center justify-between gap-4 font-body text-sm opacity-50"
+        >
+            <p>
+                &copy; {new Date().getFullYear()} Boba Pop! All rights reserved.
+            </p>
+            <div class="flex gap-6">
+                <a href={`${baseUrl}privacy`} class="hover:underline"
+                    >Privacy Policy</a
+                >
+                <a href="#" class="hover:underline">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>

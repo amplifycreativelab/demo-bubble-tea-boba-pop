@@ -1,0 +1,27 @@
+---
+interface Props {
+    href?: string;
+    variant?: "primary" | "secondary" | "accent" | "ink";
+    class?: string;
+    [x: string]: any;
+}
+
+const { href, variant = "primary", class: className, ...rest } = Astro.props;
+
+const variantClasses = {
+    primary: "bg-primary text-ink",
+    secondary: "bg-secondary text-ink",
+    accent: "bg-accent text-ink",
+    ink: "bg-ink text-white",
+};
+
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+    href={href}
+    class:list={["sticker-button", variantClasses[variant], className]}
+    {...rest}
+>
+    <slot />
+</Tag>

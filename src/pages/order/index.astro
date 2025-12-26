@@ -1,0 +1,135 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import StickerButton from "../../components/StickerButton.astro";
+import StickerCard from "../../components/StickerCard.astro";
+import { ShoppingBag, Truck, MapPin, Zap } from "lucide-preact";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<MainLayout
+    title="Order Now"
+    description="Order Boba Pop! for pickup or delivery."
+>
+    <Header />
+
+    <main class="py-20">
+        <section class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-16 space-y-6">
+                <h1 class="text-7xl md:text-9xl text-stroke-ink">ORDER HUB</h1>
+                <p
+                    class="font-body text-xl md:text-2xl opacity-60 font-bold uppercase tracking-widest"
+                >
+                    Instant Cravings Satisfaction.
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                {/* Pickup */}
+                <StickerCard
+                    class="bg-primary/5 hover:bg-primary/10 transition-colors"
+                >
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div
+                            class="w-32 h-32 bg-primary border-3 border-ink rounded-full flex items-center justify-center shrink-0 shadow-hard-sm"
+                        >
+                            <ShoppingBag size={48} className="text-white" />
+                        </div>
+                        <div
+                            class="flex-grow text-center md:text-left space-y-2"
+                        >
+                            <h3 class="text-5xl uppercase">LOCAL PICKUP</h3>
+                            <p class="font-body text-lg opacity-70">
+                                Order ahead and skip the queue at your nearest
+                                Boba Pop! store.
+                            </p>
+                        </div>
+                        <StickerButton
+                            href={`${baseUrl}locations`}
+                            variant="ink"
+                            class="text-2xl px-8 py-4 w-full md:w-auto"
+                        >
+                            CHOOSE STORE
+                        </StickerButton>
+                    </div>
+                </StickerCard>
+
+                {/* Delivery */}
+                <StickerCard
+                    rotate
+                    class="bg-secondary/5 hover:bg-secondary/10 transition-colors"
+                >
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div
+                            class="w-32 h-32 bg-secondary border-3 border-ink rounded-full flex items-center justify-center shrink-0 shadow-hard-sm"
+                        >
+                            <Truck size={48} className="text-ink" />
+                        </div>
+                        <div
+                            class="flex-grow text-center md:text-left space-y-2"
+                        >
+                            <h3 class="text-5xl uppercase">STAY ON COUCH</h3>
+                            <p class="font-body text-lg opacity-70">
+                                Get the pop delivered straight to your door.
+                                Fresh and cold.
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-2 w-full md:w-auto">
+                            <StickerButton
+                                href="#"
+                                variant="accent"
+                                class="text-lg py-3">UBER EATS</StickerButton
+                            >
+                            <StickerButton
+                                href="#"
+                                variant="primary"
+                                class="text-lg py-3">DOORDASH</StickerButton
+                            >
+                        </div>
+                    </div>
+                </StickerCard>
+
+                {/* Kits */}
+                <StickerCard
+                    class="bg-accent/5 hover:bg-accent/10 transition-colors"
+                >
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div
+                            class="w-32 h-32 bg-accent border-3 border-ink rounded-full flex items-center justify-center shrink-0 shadow-hard-sm"
+                        >
+                            <Zap size={48} className="text-ink" />
+                        </div>
+                        <div
+                            class="flex-grow text-center md:text-left space-y-2"
+                        >
+                            <h3 class="text-5xl uppercase">POPPING KITS</h3>
+                            <p class="font-body text-lg opacity-70">
+                                Make your own Boba Pop! at home with our DIY
+                                sticker-covered kits.
+                            </p>
+                        </div>
+                        <StickerButton
+                            href="#"
+                            variant="ink"
+                            class="text-2xl px-8 py-4 w-full md:w-auto"
+                        >
+                            SHOP KITS
+                        </StickerButton>
+                    </div>
+                </StickerCard>
+            </div>
+
+            <div class="mt-20 text-center">
+                <p
+                    class="font-body text-lg opacity-50 flex items-center justify-center gap-2"
+                >
+                    <MapPin size={18} /> Serving most of the Perth Metro area.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</MainLayout>

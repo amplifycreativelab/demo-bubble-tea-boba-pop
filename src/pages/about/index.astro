@@ -1,0 +1,135 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import StickerCard from "../../components/StickerCard.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<MainLayout title="About" description="The story behind Perth's loudest boba.">
+    <Header />
+
+    <main class="py-20">
+        <section class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-20 space-y-6">
+                <h1 class="text-7xl md:text-9xl text-stroke-ink">OUR STORY</h1>
+                <p
+                    class="font-body text-xl md:text-2xl opacity-60 max-w-2xl mx-auto font-bold uppercase tracking-widest"
+                >
+                    Too loud? Good.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="space-y-8">
+                    <h2 class="text-6xl text-primary">
+                        BORN IN PERTH. SHAKEN FOR YOU.
+                    </h2>
+                    <div
+                        class="space-y-4 font-body text-lg opacity-80 leading-relaxed"
+                    >
+                        <p>
+                            We didn't start Boba Pop! because Perth needed more
+                            tea. We started it because Perth needed more <strong
+                                >energy</strong
+                            >.
+                        </p>
+                        <p>
+                            Tired of beige shops and quiet sips, we decided to
+                            build a brand that hits as hard as our brown sugar
+                            pearls. From our first pop-up in <strong
+                                >Subiaco</strong
+                            > to our neon-soaked flagship in <strong
+                                >Northbridge</strong
+                            >, we've stayed true to one mission:
+                        </p>
+                        <p
+                            class="font-heading text-3xl text-ink bg-accent inline-block px-4 py-1 -rotate-1 shadow-hard-sm"
+                        >
+                            MAKE BOBA LOUD AGAIN.
+                        </p>
+                        <p>
+                            Every cup is hand-shaken, every sticker is carefully
+                            placed, and every flavor is tested to ensure it's a
+                            10/10 vibe.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <StickerCard rotate class="bg-secondary/20 p-4 rotate-3">
+                        <div
+                            class="aspect-square bg-white border-3 border-ink rounded-xl flex items-center justify-center overflow-hidden"
+                        >
+                            <span
+                                class="font-heading text-9xl text-ink/10 rotate-12"
+                                >STICKER<br />POWER!</span
+                            >
+                        </div>
+                    </StickerCard>
+                    <div
+                        class="absolute -bottom-10 -left-10 w-40 h-40 bg-primary border-3 border-ink rounded-full flex items-center justify-center -rotate-12 shadow-hard animate-pulse"
+                    >
+                        <span
+                            class="font-heading text-2xl text-white text-center"
+                            >SHAKEN<br />NOT<br />STIRRED</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Values -->
+            <div class="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <StickerCard
+                    class="bg-white group hover:-translate-y-2 transition-transform"
+                >
+                    <h3
+                        class="text-4xl mb-4 group-hover:text-primary transition-colors"
+                    >
+                        01. QUALITY
+                    </h3>
+                    <p
+                        class="font-body opacity-70 border-t-3 border-ink border-dashed pt-4"
+                    >
+                        We use real fruit, premium tea leaves, and pearls that
+                        are cooked fresh every 4 hours. No shortcuts.
+                    </p>
+                </StickerCard>
+                <StickerCard
+                    rotate
+                    class="bg-white group hover:-translate-y-2 transition-transform"
+                >
+                    <h3
+                        class="text-4xl mb-4 group-hover:text-secondary transition-colors"
+                    >
+                        02. VIBE
+                    </h3>
+                    <p
+                        class="font-body opacity-70 border-t-3 border-ink border-dashed pt-4"
+                    >
+                        Our shops are designed to be your happy place. Bright
+                        colors, loud music, and sticker-covered walls.
+                    </p>
+                </StickerCard>
+                <StickerCard
+                    class="bg-white group hover:-translate-y-2 transition-transform"
+                >
+                    <h3
+                        class="text-4xl mb-4 group-hover:text-accent transition-colors"
+                    >
+                        03. LOCAL
+                    </h3>
+                    <p
+                        class="font-body opacity-70 border-t-3 border-ink border-dashed pt-4"
+                    >
+                        We're proud West Aussies. We source locally whenever we
+                        can and support the Perth creative scene.
+                    </p>
+                </StickerCard>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</MainLayout>

@@ -1,0 +1,82 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import StickerCard from "../components/StickerCard.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<MainLayout
+    title="Privacy Policy"
+    description="How we handle your data. Spoiler: We care about boba, not tracking."
+>
+    <Header />
+
+    <main class="py-20">
+        <section class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-16 space-y-4">
+                <h1 class="text-5xl md:text-7xl text-stroke-ink">
+                    PRIVACY POLICY
+                </h1>
+                <p class="font-body opacity-60">Last updated: December 2025</p>
+            </div>
+
+            <StickerCard
+                class="bg-white p-12 space-y-8 font-body text-lg leading-relaxed"
+            >
+                <div class="space-y-4">
+                    <h2 class="font-heading text-3xl">THE SHORT VERSION</h2>
+                    <p>
+                        We're here to sell you boba, not your data. We collect
+                        only what's necessary to process your orders and make
+                        your experience better.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-heading text-2xl">1. WHAT WE COLLECT</h3>
+                    <p>
+                        Personal info (name, email, phone) only when you place
+                        an order or contact us for catering. We use cookies to
+                        remember your favorite tea mix so you don't have to
+                        rebuild it every time.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-heading text-2xl">2. HOW WE USE IT</h3>
+                    <p>
+                        To fulfill orders, respond to catering enquiries, and
+                        occasionally send you secret drop alerts (only if you
+                        subscribe). We never sell your info to third parties.
+                        That's not our vibe.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-heading text-2xl">3. THIRD PARTIES</h3>
+                    <p>
+                        We use trusted partners for payments (Stripe/Square) and
+                        delivery (Uber Eats/DoorDash). They have their own
+                        privacy policies which are just as serious as ours.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-heading text-2xl">4. YOUR RIGHTS</h3>
+                    <p>
+                        You can ask us to delete your info anytime. Just pop an
+                        email to yo@bobapop.com.au and we'll handle it.
+                    </p>
+                </div>
+
+                <div class="pt-8 border-t-3 border-ink border-dashed">
+                    <p class="font-heading text-xl">STAY POPPIN!</p>
+                </div>
+            </StickerCard>
+        </section>
+    </main>
+
+    <Footer />
+</MainLayout>

@@ -1,0 +1,199 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import StickerButton from "../../components/StickerButton.astro";
+import StickerCard from "../../components/StickerCard.astro";
+import { Mail, MessageSquare, Users, PartyPopper } from "lucide-preact";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<MainLayout
+    title="Contact & Catering"
+    description="Get in touch for catering or general enquiries."
+>
+    <Header />
+
+    <main class="py-20">
+        <section class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-20 space-y-6">
+                <h1 class="text-7xl md:text-9xl text-stroke-ink">
+                    GET IN TOUCH
+                </h1>
+                <p
+                    class="font-body text-xl md:text-2xl opacity-60 max-w-2xl mx-auto font-bold uppercase tracking-widest"
+                >
+                    Let's make something pop.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                <!-- Form Side -->
+                <div class="space-y-12">
+                    <div class="space-y-4">
+                        <h2 class="text-6xl flex items-center gap-4">
+                            <PartyPopper className="text-primary" size={48} /> CATERING
+                        </h2>
+                        <p class="font-body text-lg opacity-70">
+                            Want the Boba Pop! experience at your next event? We
+                            do office parties, weddings, and birthdays across
+                            Perth.
+                        </p>
+                    </div>
+
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label
+                                    for="name"
+                                    class="font-heading text-xl ml-2"
+                                    >NAME</label
+                                >
+                                <input
+                                    type="text"
+                                    id="name"
+                                    placeholder="Who's poppin?"
+                                    class="w-full bg-white border-3 border-ink rounded-xl px-4 py-3 font-body focus:outline-none focus:ring-2 ring-primary/50 transition-all shadow-hard-sm"
+                                />
+                            </div>
+                            <div class="space-y-2">
+                                <label
+                                    for="email"
+                                    class="font-heading text-xl ml-2"
+                                    >EMAIL</label
+                                >
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="hello@example.com"
+                                    class="w-full bg-white border-3 border-ink rounded-xl px-4 py-3 font-body focus:outline-none focus:ring-2 ring-primary/50 transition-all shadow-hard-sm"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="type" class="font-heading text-xl ml-2"
+                                >EVENT TYPE</label
+                            >
+                            <select
+                                id="type"
+                                class="w-full bg-white border-3 border-ink rounded-xl px-4 py-3 font-body focus:outline-none focus:ring-2 ring-primary/50 transition-all shadow-hard-sm appearance-none"
+                            >
+                                <option>Corporation / Office</option>
+                                <option>Birthday / Party</option>
+                                <option>Wedding</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label
+                                for="message"
+                                class="font-heading text-xl ml-2">DETAILS</label
+                            >
+                            <textarea
+                                id="message"
+                                rows="5"
+                                placeholder="Tell us about the vibes, guest count, and date..."
+                                class="w-full bg-white border-3 border-ink rounded-xl px-4 py-3 font-body focus:outline-none focus:ring-2 ring-primary/50 transition-all shadow-hard-sm"
+                            ></textarea>
+                        </div>
+
+                        <StickerButton
+                            type="submit"
+                            variant="primary"
+                            class="w-full text-2xl py-4"
+                        >
+                            SEND ENQUIRY
+                        </StickerButton>
+                    </form>
+                </div>
+
+                <!-- Info Side -->
+                <div class="space-y-8">
+                    <StickerCard rotate class="bg-secondary/10 space-y-8">
+                        <h3 class="text-4xl mb-6 flex items-center gap-3">
+                            <MessageSquare className="text-secondary" /> GENERAL CHAT
+                        </h3>
+                        <div class="space-y-6 font-body text-lg">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 bg-white border-2 border-ink rounded-full flex items-center justify-center"
+                                >
+                                    <Mail size={20} />
+                                </div>
+                                <span>yo@bobapop.com.au</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 bg-white border-2 border-ink rounded-full flex items-center justify-center"
+                                >
+                                    <Users size={20} />
+                                </div>
+                                <span>Careers: join@bobapop.com.au</span>
+                            </div>
+                        </div>
+                    </StickerCard>
+
+                    <StickerCard class="bg-accent/10 space-y-6">
+                        <h3 class="text-4xl">FAQ? POP!</h3>
+                        <div class="space-y-4 font-body">
+                            <details
+                                class="group border-b-2 border-ink/20 pb-4"
+                            >
+                                <summary
+                                    class="font-heading text-xl cursor-pointer list-none flex justify-between items-center"
+                                >
+                                    HOW FAR IN ADVANCE FOR CATERING?
+                                    <span
+                                        class="group-open:rotate-45 transition-transform"
+                                        >+</span
+                                    >
+                                </summary>
+                                <p class="pt-2 opacity-70">
+                                    Give us at least 7 days for the best
+                                    experience. We need time to prep the pearls!
+                                </p>
+                            </details>
+                            <details
+                                class="group border-b-2 border-ink/20 pb-4"
+                            >
+                                <summary
+                                    class="font-heading text-xl cursor-pointer list-none flex justify-between items-center"
+                                >
+                                    DO YOU HAVE VEGAN OPTIONS?
+                                    <span
+                                        class="group-open:rotate-45 transition-transform"
+                                        >+</span
+                                    >
+                                </summary>
+                                <p class="pt-2 opacity-70">
+                                    Yes! Most of our fruit teas and our oat milk
+                                    options are 100% vegan friendly.
+                                </p>
+                            </details>
+                            <details class="group pb-4">
+                                <summary
+                                    class="font-heading text-xl cursor-pointer list-none flex justify-between items-center"
+                                >
+                                    WHERE IS YOUR HEAD OFFICE?
+                                    <span
+                                        class="group-open:rotate-45 transition-transform"
+                                        >+</span
+                                    >
+                                </summary>
+                                <p class="pt-2 opacity-70">
+                                    Right in the heart of Subiaco. We love
+                                    Perth!
+                                </p>
+                            </details>
+                        </div>
+                    </StickerCard>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</MainLayout>

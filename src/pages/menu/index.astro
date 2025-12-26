@@ -1,0 +1,84 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import MenuIsland from "../../components/islands/MenuIsland";
+import { products } from "../../data/products";
+import { getImage } from "astro:assets";
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const productsWithImages = await Promise.all(
+    products.map(async (product) => {
+        const optimizedImage = await getImage({
+            src: product.image,
+            format: "webp",
+            width: 600,
+            height: 600,
+        });
+        return {
+            ...product, // Spreads properties including image: ImageMetadata
+            image: optimizedImage.src, // Overwrites image with string URL
+        };
+    }),
+);
+---
+
+<MainLayout title="Menu" description="Browse our high-voltage boba menu.">
+    <Header />
+
+    <main class="py-20">
+        <section class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-20 space-y-6">
+                <h1 class="text-7xl md:text-9xl text-stroke-ink">THE MENU</h1>
+                <p
+                    class="font-body text-xl md:text-2xl opacity-60 max-w-2xl mx-auto font-bold uppercase tracking-widest"
+                >
+                    Warning: Highly Addictive Liquid Assets inside.
+                </p>
+            </div>
+
+            <MenuIsland
+                initialProducts={productsWithImages}
+                baseUrl={baseUrl}
+                client:load
+            />
+        </section>
+
+        <!-- Bottom CTA -->
+        <section
+            class="mt-32 py-20 bg-primary border-t-3 border-ink overflow-hidden relative"
+        >
+            <div
+                class="absolute inset-0 opacity-10 flex flex-wrap gap-10 font-heading text-9xl pointer-events-none select-none"
+            >
+                {
+                    Array.from({ length: 10 }).map(() => (
+                        <span class="-rotate-12">POP!</span>
+                    ))
+                }
+            </div>
+
+            <div
+                class="max-w-4xl mx-auto px-4 text-center relative z-10 space-y-8"
+            >
+                <h2
+                    class="text-6xl text-white drop-shadow-[4px_4px_0px_#1A1A1B]"
+                >
+                    DROWSY? GET GLOSSY!
+                </h2>
+                <p class="font-heading text-2xl text-ink">
+                    OUR FRUIT TEAS ARE THE ULTIMATE ENERGY UPGRADE.
+                </p>
+                <a
+                    href={`${baseUrl}order`}
+                    class="inline-block bg-white border-3 border-ink px-12 py-6 rounded-squircle font-heading text-3xl shadow-hard hover:scale-105 active:scale-95 transition-all"
+                >
+                    ORDER FOR PICKUP
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</MainLayout>

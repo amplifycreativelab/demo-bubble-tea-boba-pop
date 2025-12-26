@@ -1,0 +1,242 @@
+---
+
+---
+
+<div
+    class="relative w-full max-w-lg mx-auto lg:ml-auto select-none"
+    id="hero-cup-container"
+>
+    <!-- Background Sparkles (Stickers) -->
+    <div
+        class="absolute -top-10 -left-10 w-24 h-24 bg-accent border-3 border-ink rounded-full flex items-center justify-center -rotate-12 animate-bounce shadow-hard"
+    >
+        <span class="font-heading text-xl">NEW!</span>
+    </div>
+
+    <div
+        class="absolute -bottom-5 -right-5 w-20 h-20 bg-secondary border-3 border-ink rounded-squircle flex items-center justify-center rotate-12 animate-pulse shadow-hard"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-ink"
+            ><path d="M6 13.5V19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-5.5"
+            ></path><path
+                d="M21 11c0-2.2-1.8-4-4-4h-.5a3.5 3.5 0 0 0-7 0H9c-2.2 0-4 1.8-4 4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2Z"
+            ></path><path d="M12 7V3"></path><path d="M8 3h8"></path></svg
+        >
+    </div>
+
+    <!-- The Cup SVG -->
+    <svg
+        viewBox="0 0 400 600"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-full h-auto drop-shadow-[10px_10px_0px_rgba(26,26,27,1)] transition-transform hover:scale-[1.02] duration-500"
+    >
+        <!-- Liquid Defs -->
+        <defs>
+            <clipPath id="cup-clip">
+                <path d="M100 500 L80 150 L320 150 L300 500 Z"></path>
+            </clipPath>
+            <linearGradient
+                id="liquid-gradient"
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+            >
+                <stop offset="0%" stop-color="#FF2DAB"></stop>
+                <stop offset="100%" stop-color="#1A1A1B"></stop>
+            </linearGradient>
+        </defs>
+
+        <!-- Cup Body Shadow (Hard) -->
+        <!-- Removed for dropshadow on component -->
+
+        <!-- Liquid Fill (Animated via JS) -->
+        <g clip-path="url(#cup-clip)">
+            <rect
+                id="liquid-fill"
+                x="0"
+                y="600"
+                width="400"
+                height="600"
+                fill="url(#liquid-gradient)"></rect>
+
+            <!-- Bouncing Pearls -->
+            <g id="pearls-container">
+                <!-- Pearls will be added here or just simulated in CSS -->
+                <circle
+                    cx="150"
+                    cy="480"
+                    r="15"
+                    fill="#1A1A1B"
+                    class="pearl"
+                    style="--d: 0s"></circle>
+                <circle
+                    cx="200"
+                    cy="470"
+                    r="15"
+                    fill="#1A1A1B"
+                    class="pearl"
+                    style="--d: 0.2s"></circle>
+                <circle
+                    cx="250"
+                    cy="475"
+                    r="15"
+                    fill="#1A1A1B"
+                    class="pearl"
+                    style="--d: 0.4s"></circle>
+                <circle
+                    cx="180"
+                    cy="450"
+                    r="15"
+                    fill="#1A1A1B"
+                    class="pearl"
+                    style="--d: 0.1s"></circle>
+                <circle
+                    cx="220"
+                    cy="455"
+                    r="15"
+                    fill="#1A1A1B"
+                    class="pearl"
+                    style="--d: 0.3s"></circle>
+            </g>
+
+            <!-- Ice Cubes (Jiggle) -->
+            <g id="ice-cubes">
+                <rect
+                    x="180"
+                    y="200"
+                    width="40"
+                    height="40"
+                    rx="8"
+                    fill="white"
+                    fill-opacity="0.3"
+                    class="ice"></rect>
+                <rect
+                    x="230"
+                    y="250"
+                    width="40"
+                    height="40"
+                    rx="8"
+                    fill="white"
+                    fill-opacity="0.3"
+                    class="ice"></rect>
+                <rect
+                    x="130"
+                    y="280"
+                    width="40"
+                    height="40"
+                    rx="8"
+                    fill="white"
+                    fill-opacity="0.3"
+                    class="ice"></rect>
+            </g>
+        </g>
+
+        <!-- Cup Outline -->
+        <path
+            d="M100 500 L80 150 L320 150 L300 500 Z"
+            stroke="#1A1A1B"
+            stroke-width="12"
+            stroke-linejoin="round"></path>
+        <path
+            d="M70 150 L330 150"
+            stroke="#1A1A1B"
+            stroke-width="12"
+            stroke-linecap="round"></path>
+
+        <!-- Lid -->
+        <path
+            d="M120 150 C120 100 280 100 280 150"
+            stroke="#1A1A1B"
+            stroke-width="12"
+            fill="white"
+            fill-opacity="0.5"></path>
+
+        <!-- Straw -->
+        <path
+            d="M220 120 L240 20"
+            stroke="#1A1A1B"
+            stroke-width="15"
+            stroke-linecap="round"></path>
+        <path
+            d="M220 120 L200 450"
+            stroke="#1A1A1B"
+            stroke-width="10"
+            stroke-opacity="0.2"></path>
+    </svg>
+</div>
+
+<style>
+    .pearl {
+        animation: pearl-bounce 2s infinite ease-in-out;
+        animation-delay: var(--d);
+        will-change: transform;
+    }
+
+    @keyframes pearl-bounce {
+        0%,
+        100% {
+            transform: translateY(0) scale(1);
+        }
+        50% {
+            transform: translateY(-30px) scale(1.1);
+        }
+    }
+
+    .ice {
+        animation: ice-jiggle 3s infinite ease-in-out;
+        transform-origin: center;
+    }
+
+    @keyframes ice-jiggle {
+        0%,
+        100% {
+            transform: rotate(0) translate(0);
+        }
+        25% {
+            transform: rotate(5deg) translate(2px, -2px);
+        }
+        75% {
+            transform: rotate(-5deg) translate(-2px, 2px);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .pearl,
+        .ice {
+            animation: none;
+        }
+    }
+</style>
+
+<script>
+    const liquidFill = document.getElementById("liquid-fill");
+
+    function updateLiquidFill() {
+        const scroll = window.scrollY;
+        const maxScroll = 300;
+        const fillPercent = Math.min(scroll / maxScroll, 1);
+
+        // Fill stays at bottom (y=600) and moves up (to y=150)
+        // y = 600 - (600 - 150) * fillPercent
+        const yPos = 600 - 450 * fillPercent;
+
+        if (liquidFill) {
+            liquidFill.setAttribute("y", yPos.toString());
+        }
+    }
+
+    window.addEventListener("scroll", updateLiquidFill);
+    updateLiquidFill(); // Initial call
+</script>

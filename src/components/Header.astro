@@ -1,0 +1,256 @@
+---
+import StickerButton from "./StickerButton.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const navLinks = [
+    { name: "Menu", href: `${baseUrl}menu` },
+    { name: "Specials", href: `${baseUrl}specials` },
+    { name: "Locations", href: `${baseUrl}locations` },
+    { name: "About", href: `${baseUrl}about` },
+];
+---
+
+<header
+    class="fixed top-0 left-0 right-0 z-[10000] px-4 py-4 transition-transform duration-300"
+>
+    <nav
+        class="max-w-7xl mx-auto flex items-center justify-between bg-white border-3 border-ink rounded-squircle px-6 py-3 shadow-hard"
+    >
+        <a href={baseUrl} class="flex items-center gap-2 group">
+            <div
+                class="w-10 h-10 bg-primary border-3 border-ink rounded-full flex items-center justify-center font-heading text-2xl text-ink shadow-hard-sm group-hover:-rotate-12 transition-transform"
+            >
+                B
+            </div>
+            <span class="font-heading text-2xl tracking-tighter text-stroke-ink"
+                >BOBA POP!</span
+            >
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-8">
+            {
+                navLinks.map((link) => (
+                    <a
+                        href={link.href}
+                        class="font-heading text-xl hover:text-primary transition-colors hover:scale-110"
+                    >
+                        {link.name}
+                    </a>
+                ))
+            }
+        </div>
+
+        <div class="flex items-center gap-4">
+            <StickerButton
+                href={`${baseUrl}order`}
+                variant="accent"
+                class="hidden sm:flex text-sm py-2 px-4"
+            >
+                ORDER NOW
+            </StickerButton>
+
+            <!-- Mobile Menu Toggle -->
+            <button
+                id="mobile-menu-toggle"
+                aria-label="Toggle Menu"
+                class="md:hidden w-12 h-12 flex flex-col items-center justify-center gap-1.5 border-3 border-ink rounded-lg bg-secondary shadow-hard-sm active:translate-y-0.5 transition-all z-50 relative"
+            >
+                <div
+                    class="w-7 h-1 bg-ink transition-transform duration-300 origin-center bar-1"
+                >
+                </div>
+                <div
+                    class="w-7 h-1 bg-ink transition-opacity duration-300 bar-2"
+                >
+                </div>
+                <div
+                    class="w-7 h-1 bg-ink transition-transform duration-300 origin-center bar-3"
+                >
+                </div>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- Mobile Menu Overlay - Outside the fixed header to avoid scroll-hide issues -->
+<div
+    id="mobile-menu-overlay"
+    class="fixed inset-0 bg-primary z-[100] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col items-center justify-start px-6 sm:px-8 text-center overflow-y-auto overflow-x-hidden"
+>
+    <!-- Background Decoration -->
+    <div
+        class="absolute inset-0 opacity-10 flex flex-wrap gap-10 font-heading text-9xl pointer-events-none select-none"
+    >
+        {
+            Array.from({ length: 12 }).map(() => (
+                <span class="-rotate-12 uppercase">POP!</span>
+            ))
+        }
+    </div>
+
+    <div class="relative z-10 space-y-6 sm:space-y-8 w-full max-w-sm">
+        <h2 class="text-5xl sm:text-6xl text-white text-stroke-ink mb-8 sm:mb-12">
+            MAIN MENU
+        </h2>
+        <div class="flex flex-col gap-4 sm:gap-6">
+            {
+                navLinks.map((link) => (
+                    <a
+                        href={link.href}
+                        class="mobile-nav-link font-heading text-4xl sm:text-5xl text-ink bg-white border-3 border-ink rounded-xl py-3 sm:py-4 shadow-hard hover:scale-105 active:translate-y-1 active:shadow-none transition-all"
+                    >
+                        {link.name}
+                    </a>
+                ))
+            }
+        </div>
+
+        <div class="pt-10 sm:pt-12">
+            <StickerButton
+                href={`${baseUrl}order`}
+                variant="accent"
+                class="w-full text-2xl sm:text-3xl py-5 sm:py-6"
+            >
+                ORDER NOW
+            </StickerButton>
+        </div>
+    </div>
+</div>
+
+<style is:global>
+    header.scroll-down:not(.menu-open-header) {
+        transform: translateY(-110%);
+    }
+    header.scroll-up {
+        transform: translateY(0);
+    }
+
+    body.menu-open {
+        overflow: hidden !important;
+    }
+
+    #mobile-menu-overlay {
+        visibility: hidden;
+        pointer-events: none;
+        z-index: 9999;
+        -webkit-overflow-scrolling: touch;
+        padding-top: calc(env(safe-area-inset-top, 0px) + 6rem);
+        padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 2.5rem);
+    }
+
+    #mobile-menu-overlay.open {
+        visibility: visible;
+        pointer-events: auto;
+        translate: 0 0;
+    }
+
+    /* Burger Animation */
+    #mobile-menu-toggle.open .bar-1 {
+        transform: translateY(10px) rotate(45deg);
+    }
+    #mobile-menu-toggle.open .bar-2 {
+        opacity: 0;
+    }
+    #mobile-menu-toggle.open .bar-3 {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+</style>
+
+<script>
+    function initMenu() {
+        console.log("Boba Pop: Initializing Header...");
+        const toggle = document.getElementById("mobile-menu-toggle");
+        const overlay = document.getElementById("mobile-menu-overlay");
+        const header = document.querySelector("header");
+        const body = document.body;
+        const links = document.querySelectorAll(".mobile-nav-link");
+
+        if (!toggle || !overlay) {
+            console.error("Boba Pop: Header elements missing!", {
+                toggle,
+                overlay,
+            });
+            return;
+        }
+
+        // --- Toggle Logic ---
+        function toggleMenu() {
+            console.log("Boba Pop: Toggling Menu...");
+            const isOpen = overlay?.classList.toggle("open");
+            toggle?.classList.toggle("open");
+            body.classList.toggle("menu-open");
+            header?.classList.toggle("menu-open-header");
+
+            if (toggle) {
+                // @ts-ignore
+                toggle.style.backgroundColor = isOpen ? "#00F0FF" : "#FFF01F";
+            }
+            console.log("Boba Pop: Menu is now", isOpen ? "OPEN" : "CLOSED");
+        }
+
+        toggle?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // Listen for global menu toggle events (e.g. from MobileActionBar)
+        window.addEventListener("boba:toggle-menu", () => {
+            console.log("Boba Pop: Received global toggle event");
+            toggleMenu();
+        });
+
+        links.forEach((link) => {
+            link.addEventListener("click", () => {
+                if (overlay?.classList.contains("open")) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && overlay?.classList.contains("open")) {
+                toggleMenu();
+            }
+        });
+
+        // --- Scroll Logic ---
+        let lastScroll = 0;
+        window.addEventListener("scroll", () => {
+            if (overlay?.classList.contains("open")) return;
+
+            const currentScroll = window.pageYOffset;
+            if (currentScroll <= 0) {
+                header?.classList.remove("scroll-up", "scroll-down");
+                return;
+            }
+
+            if (
+                currentScroll > lastScroll &&
+                !header?.classList.contains("scroll-down")
+            ) {
+                header?.classList.remove("scroll-up");
+                header?.classList.add("scroll-down");
+            } else if (
+                currentScroll < lastScroll &&
+                header?.classList.contains("scroll-down")
+            ) {
+                header?.classList.remove("scroll-down");
+                header?.classList.add("scroll-up");
+            }
+            lastScroll = currentScroll;
+        });
+
+        console.log("Boba Pop: Header Logic Ready");
+    }
+
+    // Run on initial load
+    initMenu();
+
+    // Re-run on View Transitions
+    document.addEventListener("astro:after-swap", () => {
+        console.log("Boba Pop: View Transition - Re-initializing...");
+        initMenu();
+    });
+</script>

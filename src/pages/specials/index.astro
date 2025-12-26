@@ -1,0 +1,109 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import StickerCard from "../../components/StickerCard.astro";
+import StickerButton from "../../components/StickerButton.astro";
+import { specials } from "../../data/specials";
+import { Image } from "astro:assets";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<MainLayout
+    title="Specials"
+    description="Check out our limited-time boba drops."
+>
+    <Header />
+
+    <main class="py-20">
+        <section class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-20 space-y-6">
+                <h1 class="text-7xl md:text-9xl text-stroke-ink">
+                    LIMITED DROPS
+                </h1>
+                <p
+                    class="font-body text-xl md:text-2xl opacity-60 max-w-2xl mx-auto font-bold uppercase tracking-widest"
+                >
+                    Get 'em before they pop.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                {
+                    specials.map((special) => (
+                        <div class="sticker-card p-0 flex flex-col md:flex-row overflow-hidden bg-white rotate-1 hover:rotate-0 transition-transform duration-500">
+                            <div class="relative md:w-1/2 h-80 md:h-auto border-b-3 md:border-b-0 md:border-r-3 border-ink overflow-hidden bg-secondary/10">
+                                <Image
+                                    src={special.image}
+                                    alt={special.title}
+                                    width={600}
+                                    height={800}
+                                    format="webp"
+                                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                />
+                                <span class="font-heading text-6xl text-ink/10 rotate-12 absolute bottom-2 right-2 pointer-events-none">
+                                    {special.badge}
+                                </span>
+                                <div class="absolute top-6 left-6 bg-accent border-3 border-ink px-4 py-2 font-heading text-2xl -rotate-12 shadow-hard-sm z-10">
+                                    {special.badge}!
+                                </div>
+                            </div>
+
+                            <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                                <div class="space-y-4">
+                                    <h3 class="text-5xl leading-none">
+                                        {special.title}
+                                    </h3>
+                                    <p class="font-body text-lg opacity-70">
+                                        {special.description}
+                                    </p>
+                                    <div class="font-heading text-3xl text-primary">
+                                        {special.price}
+                                    </div>
+                                </div>
+
+                                <div class="pt-8">
+                                    <StickerButton
+                                        href={`${baseUrl}order`}
+                                        variant="primary"
+                                        class="w-full text-xl py-4"
+                                    >
+                                        GRAB IT NOW
+                                    </StickerButton>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Teaser -->
+            <div
+                class="mt-32 text-center p-20 bg-ink text-white rounded-squircle shadow-hard-lg"
+            >
+                <h3 class="font-heading text-6xl mb-6 text-secondary">
+                    NEXT DROP LOADING...
+                </h3>
+                <p class="font-body text-xl opacity-60 mb-10">
+                    Follow us on social to be the first to know when the next
+                    flavor drops.
+                </p>
+                <div class="flex justify-center gap-6">
+                    <a
+                        href="#"
+                        class="font-heading text-2xl hover:text-primary underline"
+                        >INSTAGRAM</a
+                    >
+                    <a
+                        href="#"
+                        class="font-heading text-2xl hover:text-primary underline"
+                        >TIKTOK</a
+                    >
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</MainLayout>

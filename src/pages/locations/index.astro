@@ -1,0 +1,127 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import StickerCard from "../../components/StickerCard.astro";
+import StickerButton from "../../components/StickerButton.astro";
+import { locations } from "../../data/locations";
+import { MapPin, Phone, Clock, ExternalLink } from "lucide-preact";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<MainLayout
+    title="Locations"
+    description="Find your nearest Boba Pop! store in Perth."
+>
+    <Header />
+
+    <main class="py-20">
+        <section class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-20 space-y-6">
+                <h1 class="text-7xl md:text-9xl text-stroke-ink">FIND US</h1>
+                <p
+                    class="font-body text-xl md:text-2xl opacity-60 max-w-2xl mx-auto font-bold uppercase tracking-widest"
+                >
+                    Cravings are closer than you think.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                {
+                    locations.map((loc) => (
+                        <StickerCard
+                            rotate
+                            class="flex flex-col h-full bg-white group"
+                        >
+                            <div class="mb-4">
+                                <div class="w-12 h-12 bg-primary border-3 border-ink rounded-lg flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform shadow-hard-sm">
+                                    <MapPin className="text-ink" />
+                                </div>
+                                <h3 class="text-4xl mb-2">{loc.name}</h3>
+                                <p class="font-body text-lg opacity-70 mb-6">
+                                    {loc.address}
+                                </p>
+                            </div>
+
+                            <div class="space-y-4 font-body mb-8 flex-grow">
+                                <div class="flex items-center gap-3">
+                                    <Phone
+                                        size={18}
+                                        className="text-secondary"
+                                    />
+                                    <span>{loc.phone}</span>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-3">
+                                        <Clock
+                                            size={18}
+                                            className="text-accent"
+                                        />
+                                        <span class="font-bold">
+                                            OPENING HOURS:
+                                        </span>
+                                    </div>
+                                    <div class="pl-7 opacity-70 text-sm">
+                                        <p>Mon-Fri: {loc.hours.mon_fri}</p>
+                                        <p>Sat-Sun: {loc.hours.sat_sun}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <StickerButton
+                                    href={loc.mapUrl}
+                                    variant="ink"
+                                    class="text-lg py-3 flex gap-2"
+                                >
+                                    <ExternalLink size={18} /> MAP
+                                </StickerButton>
+                                <StickerButton
+                                    href={`tel:${loc.phone.replace(/\s/g, "")}`}
+                                    variant="secondary"
+                                    class="text-lg py-3 flex gap-2"
+                                >
+                                    <Phone size={18} /> CALL
+                                </StickerButton>
+                            </div>
+                        </StickerCard>
+                    ))
+                }
+            </div>
+
+            <!-- Areas we serve -->
+            <div
+                class="mt-32 p-12 bg-white border-3 border-ink rounded-squircle shadow-hard text-center"
+            >
+                <h4 class="font-heading text-4xl mb-6">AREAS WE SERVE</h4>
+                <p class="font-body text-lg opacity-70 mb-8 max-w-2xl mx-auto">
+                    While we have physical stores in Subiaco, Northbridge, and
+                    Vic Park, we deliver our popping kits and catering across
+                    most of the Perth metro area including:
+                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    {
+                        [
+                            "Mount Lawley",
+                            "Fremantle",
+                            "Scarborough",
+                            "Cottesloe",
+                            "Leederville",
+                            "Applecross",
+                            "Duncraig",
+                            "Morley",
+                            "Belmont",
+                        ].map((sub) => (
+                            <span class="bg-background border-2 border-ink px-4 py-2 rounded-xl font-heading text-lg">
+                                {sub}
+                            </span>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</MainLayout>
