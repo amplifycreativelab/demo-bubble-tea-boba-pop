@@ -43,8 +43,8 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
     return (
         <div className="space-y-12">
             {/* Controls */}
-            <div className="bg-white border-3 border-ink rounded-squircle p-8 shadow-hard sticky top-24 z-30">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="bg-white border-3 border-ink rounded-squircle p-4 lg:p-8 shadow-hard sticky top-24 z-30">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
                     {/* Search */}
                     <div className="relative">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40" size={20} />
