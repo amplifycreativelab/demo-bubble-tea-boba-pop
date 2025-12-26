@@ -46,15 +46,19 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
             <div className="bg-white border-3 border-ink rounded-squircle p-3 lg:p-8 shadow-hard sticky top-24 z-30">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
                     {/* Search */}
-                    <div className="relative">
-                        <input
-                            type="text"
-                            placeholder="Search cravings..."
-                            className="w-full bg-background border-3 border-ink rounded-xl pl-12 pr-4 py-2 lg:py-3 text-sm lg:text-base font-body focus:outline-none focus:ring-2 ring-primary/50 transition-all"
-                            value={search}
-                            onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
-                        />
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40 z-10" size={20} />
+                    <div>
+                        <div className="relative">
+                            <input
+                                type="text"
+                                placeholder="Search cravings..."
+                                className="w-full bg-background border-3 border-ink rounded-xl pl-12 pr-4 py-2 lg:py-3 text-sm lg:text-base font-body focus:outline-none focus:ring-2 ring-primary/50 transition-all"
+                                value={search}
+                                onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
+                            />
+                            <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-ink/40 pointer-events-none">
+                                <Search size={20} />
+                            </div>
+                        </div>
                     </div>
 
                     {/* Categories */}
