@@ -43,15 +43,15 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
     return (
         <div className="space-y-12">
             {/* Controls */}
-            <div className="bg-white border-3 border-ink rounded-squircle p-4 lg:p-8 shadow-hard sticky top-24 z-30">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
+            <div className="bg-white border-3 border-ink rounded-squircle p-3 lg:p-8 shadow-hard sticky top-24 z-30">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-8">
                     {/* Search */}
                     <div className="relative">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40" size={20} />
                         <input
                             type="text"
                             placeholder="Search cravings..."
-                            className="w-full bg-background border-3 border-ink rounded-xl pl-12 pr-4 py-3 font-body focus:outline-none focus:ring-2 ring-primary/50 transition-all"
+                            className="w-full bg-background border-3 border-ink rounded-xl pl-12 pr-4 py-2 lg:py-3 text-sm lg:text-base font-body focus:outline-none focus:ring-2 ring-primary/50 transition-all"
                             value={search}
                             onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
                         />
@@ -63,7 +63,7 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
                             <button
                                 key={cat}
                                 onClick={() => setSelectedCategory(cat)}
-                                className={`px-4 py-2 font-heading text-lg border-3 border-ink rounded-xl transition-all ${selectedCategory === cat ? 'bg-primary shadow-hard-sm -translate-y-1' : 'bg-background hover:bg-white'
+                                className={`px-3 py-1.5 lg:px-4 lg:py-2 font-heading text-sm lg:text-lg border-3 border-ink rounded-xl transition-all ${selectedCategory === cat ? 'bg-primary shadow-hard-sm -translate-y-1' : 'bg-background hover:bg-white'
                                     }`}
                             >
                                 {cat}
@@ -77,7 +77,7 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
                             <button
                                 key={tag.id}
                                 onClick={() => toggleTag(tag.id)}
-                                className={`flex items-center gap-2 px-3 py-2 font-body text-sm border-2 border-ink rounded-full transition-all ${activeTags.includes(tag.id) ? 'bg-accent font-bold' : 'bg-white opacity-60'
+                                className={`flex items-center gap-2 px-2 py-1 lg:px-3 lg:py-2 font-body text-xs lg:text-sm border-2 border-ink rounded-full transition-all ${activeTags.includes(tag.id) ? 'bg-accent font-bold' : 'bg-white opacity-60'
                                     }`}
                             >
                                 {tag.icon}
