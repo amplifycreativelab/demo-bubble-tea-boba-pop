@@ -47,7 +47,6 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
                     {/* Search */}
                     <div className="relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40" size={20} />
                         <input
                             type="text"
                             placeholder="Search cravings..."
@@ -55,10 +54,11 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
                             value={search}
                             onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
                         />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40 z-10" size={20} />
                     </div>
 
                     {/* Categories */}
-                    <div className="flex lg:flex-wrap overflow-x-auto gap-2 -mx-1 px-1 lg:mx-0 lg:px-0 pb-1 lg:pb-0 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    <div className="flex lg:flex-wrap overflow-x-auto lg:overflow-visible gap-2 -mx-1 px-1 py-2 lg:mx-0 lg:px-0 lg:py-0 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                         {categories.map(cat => (
                             <button
                                 key={cat}
@@ -72,7 +72,7 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
                     </div>
 
                     {/* Tags */}
-                    <div className="flex lg:flex-wrap overflow-x-auto gap-2 -mx-1 px-1 lg:mx-0 lg:px-0 pb-1 lg:pb-0 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    <div className="flex lg:flex-wrap overflow-x-auto lg:overflow-visible gap-2 -mx-1 px-1 py-2 lg:mx-0 lg:px-0 lg:py-0 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                         {tags.map(tag => (
                             <button
                                 key={tag.id}
