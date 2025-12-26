@@ -44,7 +44,7 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
         <div className="space-y-12">
             {/* Controls */}
             <div className="bg-white border-3 border-ink rounded-squircle p-3 lg:p-8 shadow-hard sticky top-24 z-30">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-8">
                     {/* Search */}
                     <div className="relative">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40" size={20} />
@@ -58,12 +58,12 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
                     </div>
 
                     {/* Categories */}
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex lg:flex-wrap overflow-x-auto gap-2 -mx-1 px-1 lg:mx-0 lg:px-0 pb-1 lg:pb-0 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                         {categories.map(cat => (
                             <button
                                 key={cat}
                                 onClick={() => setSelectedCategory(cat)}
-                                className={`px-3 py-1.5 lg:px-4 lg:py-2 font-heading text-sm lg:text-lg border-3 border-ink rounded-xl transition-all ${selectedCategory === cat ? 'bg-primary shadow-hard-sm -translate-y-1' : 'bg-background hover:bg-white'
+                                className={`flex-shrink-0 whitespace-nowrap px-3 py-1.5 lg:px-4 lg:py-2 font-heading text-sm lg:text-lg border-3 border-ink rounded-xl transition-all ${selectedCategory === cat ? 'bg-primary shadow-hard-sm -translate-y-1' : 'bg-background hover:bg-white'
                                     }`}
                             >
                                 {cat}
@@ -72,12 +72,12 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
                     </div>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex lg:flex-wrap overflow-x-auto gap-2 -mx-1 px-1 lg:mx-0 lg:px-0 pb-1 lg:pb-0 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                         {tags.map(tag => (
                             <button
                                 key={tag.id}
                                 onClick={() => toggleTag(tag.id)}
-                                className={`flex items-center gap-2 px-2 py-1 lg:px-3 lg:py-2 font-body text-xs lg:text-sm border-2 border-ink rounded-full transition-all ${activeTags.includes(tag.id) ? 'bg-accent font-bold' : 'bg-white opacity-60'
+                                className={`flex-shrink-0 whitespace-nowrap flex items-center gap-2 px-2 py-1 lg:px-3 lg:py-2 font-body text-xs lg:text-sm border-2 border-ink rounded-full transition-all ${activeTags.includes(tag.id) ? 'bg-accent font-bold' : 'bg-white opacity-60'
                                     }`}
                             >
                                 {tag.icon}
