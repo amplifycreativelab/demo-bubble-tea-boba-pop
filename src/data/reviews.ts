@@ -11,7 +11,7 @@ export const reviews: Review[] = [
         id: '1',
         author: 'Sarah J.',
         rating: 5,
-        quote: "The brown sugar pearls here are next level. Literally the best in Perth!",
+        quote: "The brown sugar pearls here are next level. Easily one of my favourites.",
         avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah'
     },
     {
@@ -25,7 +25,7 @@ export const reviews: Review[] = [
         id: '3',
         author: 'Leila K.',
         rating: 4,
-        quote: "Neon Mango Fizz is so refreshing on a hot Perth day. Highly recommend!",
+        quote: "Neon Mango Fizz is so refreshing on a hot day. Highly recommend!",
         avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Leila'
     }
 ];

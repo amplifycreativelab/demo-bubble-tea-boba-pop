@@ -1,41 +1,17 @@
-# Boba Pop! - Neobrutalist Astro Demo
+# demo-bubble-tea-boba-pop
 
-A high-performance, high-conversion brochure site for a Perth-based bubble tea shop.
+This repository contains a non-indexed concept demo built for portfolio purposes by Amplify Creative Lab.
 
-## Tech Stack
-- **Astro 5** (Static Site Generation)
-- **Tailwind CSS 4** (Neobrutalist styling)
-- **Preact** (Interactive islands)
-- **Lucide Preact** (Icons)
-- **View Transitions API** (Page transitions)
+Main site: https://amplifycreativelab.com
 
-## Getting Started
+## Development
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+- Install: `npm install`
+- Run: `npm run dev`
+- Build: `npm run build`
+- Preview: `npm run preview`
 
-2. **Run dev server:**
-   ```bash
-   npm run dev
-   ```
+## Notes
 
-3. **Build for production:**
-   ```bash
-   npm run build
-   ```
-
-## GitHub Pages Deployment
-
-This project is configured for GitHub Pages. 
-- **Site:** `https://amplifycreativelab.github.io`
-- **Base:** `/boba-pop/`
-
-To change these, update `astro.config.mjs`.
-
-## Features
-- **Sticker-Pop Aesthetic:** High contrast, heavy outlines, and bouncy motion.
-- **Interactive Drink Builder:** Real-time sweetness and topping selection.
-- **Scroll-Triggered Hero:** Liquid fill animation on scroll.
-- **Perth SEO:** Optimized for local searches in Subiaco, Northbridge, and Vic Park.
+- Content is fictional/placeholder.
+- `noindex, nofollow` meta and `public/robots.txt` disallow are enforced to avoid SEO competition.

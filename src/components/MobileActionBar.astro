@@ -1,5 +1,5 @@
 ---
-import { Menu, ShoppingBag, Phone, MapPin } from "lucide-preact";
+import { Menu, ShoppingBag, Info, MapPin } from "lucide-preact";
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
@@ -37,11 +37,11 @@ const baseUrl = import.meta.env.BASE_URL;
         </div>
         <div class="w-px h-8 bg-white/20"></div>
         <a
-            href="tel:0892345678"
+            href={`${baseUrl}about`}
             class="flex flex-col items-center gap-1 hover:text-accent transition-colors"
         >
-            <Phone size={20} />
-            <span class="font-heading text-[10px] uppercase">CALL</span>
+            <Info size={20} />
+            <span class="font-heading text-[10px] uppercase">INFO</span>
         </a>
         <div class="w-px h-8 bg-white/20"></div>
         <a

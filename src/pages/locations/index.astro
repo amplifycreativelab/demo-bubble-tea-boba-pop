@@ -5,14 +5,14 @@ import Footer from "../../components/Footer.astro";
 import StickerCard from "../../components/StickerCard.astro";
 import StickerButton from "../../components/StickerButton.astro";
 import { locations } from "../../data/locations";
-import { MapPin, Phone, Clock, ExternalLink } from "lucide-preact";
+import { MapPin, Clock, ExternalLink, ShoppingBag } from "lucide-preact";
 
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <MainLayout
     title="Locations"
-    description="Find your nearest Boba Pop! store in Perth."
+    description="Find a Boba Pop! location (concept demo)."
 >
     <Header />
 
@@ -45,13 +45,6 @@ const baseUrl = import.meta.env.BASE_URL;
                             </div>
 
                             <div class="space-y-4 font-body mb-8 flex-grow">
-                                <div class="flex items-center gap-3">
-                                    <Phone
-                                        size={18}
-                                        className="text-secondary"
-                                    />
-                                    <span>{loc.phone}</span>
-                                </div>
                                 <div class="space-y-1">
                                     <div class="flex items-center gap-3">
                                         <Clock
@@ -78,11 +71,11 @@ const baseUrl = import.meta.env.BASE_URL;
                                     <ExternalLink size={18} /> MAP
                                 </StickerButton>
                                 <StickerButton
-                                    href={`tel:${loc.phone.replace(/\s/g, "")}`}
+                                    href={`${baseUrl}order`}
                                     variant="secondary"
                                     class="text-lg py-3 flex gap-2"
                                 >
-                                    <Phone size={18} /> CALL
+                                    <ShoppingBag size={18} /> ORDER
                                 </StickerButton>
                             </div>
                         </StickerCard>
@@ -96,22 +89,21 @@ const baseUrl = import.meta.env.BASE_URL;
             >
                 <h4 class="font-heading text-4xl mb-6">AREAS WE SERVE</h4>
                 <p class="font-body text-lg opacity-70 mb-8 max-w-2xl mx-auto">
-                    While we have physical stores in Subiaco, Northbridge, and
-                    Vic Park, we deliver our popping kits and catering across
-                    most of the Perth metro area including:
+                    While we have pop-up counters in a few fictional districts,
+                    we can deliver demo-only catering kits across:
                 </p>
                 <div class="flex flex-wrap justify-center gap-3">
                     {
                         [
-                            "Mount Lawley",
-                            "Fremantle",
-                            "Scarborough",
-                            "Cottesloe",
-                            "Leederville",
-                            "Applecross",
-                            "Duncraig",
-                            "Morley",
-                            "Belmont",
+                            "Central District",
+                            "Riverside",
+                            "Old Quarter",
+                            "East Market",
+                            "Harbor Walk",
+                            "Studio Row",
+                            "North Arcade",
+                            "South Terrace",
+                            "Museum Mile",
                         ].map((sub) => (
                             <span class="bg-background border-2 border-ink px-4 py-2 rounded-xl font-heading text-lg">
                                 {sub}
