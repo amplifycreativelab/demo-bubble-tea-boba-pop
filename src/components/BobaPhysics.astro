@@ -2,9 +2,18 @@
 interface Props {
     count?: number;
     class?: string;
+    colorful?: boolean;
 }
 
-const { count = 10, class: className } = Astro.props;
+const { count = 10, class: className, colorful = true } = Astro.props;
+
+// Color palette for boba pearls
+const colors = [
+    'bg-primary/30',
+    'bg-secondary/30', 
+    'bg-accent/30',
+    'bg-ink/20',
+];
 ---
 
 <div
@@ -16,15 +25,40 @@ const { count = 10, class: className } = Astro.props;
     {
         Array.from({ length: count }).map((_, i) => (
             <div
-                class="boba-pearl absolute w-6 h-6 bg-ink rounded-full"
+                class:list={[
+                    "boba-pearl absolute rounded-full",
+                    colorful ? colors[i % colors.length] : "bg-ink/20",
+                ]}
                 style={{
+                    width: `${8 + Math.random() * 24}px`,
+                    height: `${8 + Math.random() * 24}px`,
                     left: `${Math.random() * 100}%`,
                     top: `${Math.random() * 100}%`,
                     "--delay": `${Math.random() * 5}s`,
-                    "--duration": `${3 + Math.random() * 4}s`,
-                    "--tx": `${(Math.random() - 0.5) * 100}px`,
-                    "--ty": `${(Math.random() - 0.5) * 100}px`,
-                    opacity: 0.1 + Math.random() * 0.2,
+                    "--duration": `${4 + Math.random() * 6}s`,
+                    "--tx": `${(Math.random() - 0.5) * 150}px`,
+                    "--ty": `${(Math.random() - 0.5) * 150}px`,
+                    "--scale": `${0.8 + Math.random() * 0.4}`,
+                }}
+            />
+        ))
+    }
+    
+    <!-- Additional glow orbs for atmosphere -->
+    {
+        Array.from({ length: Math.floor(count / 3) }).map((_, i) => (
+            <div
+                class="glow-orb absolute rounded-full blur-xl"
+                style={{
+                    width: `${60 + Math.random() * 100}px`,
+                    height: `${60 + Math.random() * 100}px`,
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    background: i % 2 === 0 
+                        ? 'radial-gradient(circle, rgba(255, 45, 171, 0.15) 0%, transparent 70%)'
+                        : 'radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%)',
+                    "--delay": `${Math.random() * 8}s`,
+                    "--duration": `${8 + Math.random() * 8}s`,
                 }}
             />
         ))
@@ -36,20 +70,46 @@ const { count = 10, class: className } = Astro.props;
         animation: float var(--duration) infinite ease-in-out;
         animation-delay: var(--delay);
         will-change: transform;
+        filter: blur(0.5px);
     }
 
     @keyframes float {
         0%,
         100% {
-            transform: translate(0, 0);
+            transform: translate(0, 0) scale(1);
+        }
+        25% {
+            transform: translate(calc(var(--tx) * 0.5), calc(var(--ty) * 0.3)) scale(var(--scale));
         }
         50% {
-            transform: translate(var(--tx), var(--ty));
+            transform: translate(var(--tx), var(--ty)) scale(1);
+        }
+        75% {
+            transform: translate(calc(var(--tx) * 0.7), calc(var(--ty) * 0.5)) scale(calc(var(--scale) * 0.9));
+        }
+    }
+    
+    .glow-orb {
+        animation: drift var(--duration) infinite ease-in-out;
+        animation-delay: var(--delay);
+        will-change: transform, opacity;
+    }
+    
+    @keyframes drift {
+        0%,
+        100% {
+            transform: translate(0, 0);
+            opacity: 0.5;
+        }
+        50% {
+            transform: translate(30px, -20px);
+            opacity: 0.8;
         }
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .boba-pearl {
+        .boba-pearl,
+        .glow-orb {
             animation: none;
         }
     }

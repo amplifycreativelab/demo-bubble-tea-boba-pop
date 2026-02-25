@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Outfit:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -7,6 +7,13 @@
     --color-accent: #FFF01F;
     --color-background: #F9F7F2;
     --color-ink: #1A1A1B;
+    
+    /* Extended palette for depth */
+    --color-primary-dark: #D91A8F;
+    --color-secondary-dark: #00C4CC;
+    --color-accent-dark: #E6D600;
+    --color-cream: #FFF8E7;
+    --color-blush: #FFE4EC;
 
     --font-heading: "Bangers", system-ui, sans-serif;
     --font-body: "Outfit", system-ui, sans-serif;
@@ -15,6 +22,11 @@
     --shadow-hard-sm: 4px 4px 0px 0px #1A1A1B;
     --shadow-hard-lg: 8px 8px 0px 0px #1A1A1B;
     --shadow-pressed: 2px 2px 0px 0px #1A1A1B;
+    
+    /* Glow shadows for depth */
+    --shadow-glow-primary: 0 0 30px rgba(255, 45, 171, 0.4);
+    --shadow-glow-secondary: 0 0 30px rgba(0, 240, 255, 0.4);
+    --shadow-glow-accent: 0 0 30px rgba(255, 240, 31, 0.4);
 
     --radius-squircle: 20px;
 
@@ -24,6 +36,11 @@
 @layer base {
     body {
         @apply bg-background text-ink font-body selection:bg-secondary selection:text-ink;
+        background-image: 
+            radial-gradient(ellipse at 20% 0%, rgba(255, 45, 171, 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 100%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 50%, rgba(255, 240, 31, 0.05) 0%, transparent 70%);
+        background-attachment: fixed;
     }
 
     h1,
@@ -34,27 +51,97 @@
     h6 {
         @apply font-heading uppercase tracking-wider;
         -webkit-text-stroke: 1.5px var(--color-ink);
+        paint-order: stroke fill;
     }
 }
 
 @layer components {
     .sticker-card {
-        @apply bg-white border-3 border-ink rounded-squircle shadow-hard transition-all;
+        @apply bg-white border-3 border-ink rounded-squircle shadow-hard transition-all duration-300;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+    
+    .sticker-card:hover {
+        @apply shadow-hard-lg;
+        transform: translateY(-4px) rotate(0deg) !important;
     }
 
     .sticker-button {
-        @apply inline-flex items-center justify-center bg-primary border-3 border-ink rounded-squircle px-6 py-3 font-heading text-xl shadow-hard transition-all active:shadow-pressed active:translate-x-[4px] active:translate-y-[4px] hover:scale-[1.05] hover:-rotate-1;
+        @apply inline-flex items-center justify-center bg-primary border-3 border-ink rounded-squircle px-6 py-3 font-heading text-xl shadow-hard transition-all duration-200 relative overflow-hidden;
+        position: relative;
+    }
+    
+    .sticker-button::before {
+        content: '';
+        @apply absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-200;
+    }
+    
+    .sticker-button:hover::before {
+        opacity: 1;
+    }
+    
+    .sticker-button:active {
+        @apply shadow-pressed translate-x-[4px] translate-y-[4px];
+    }
+    
+    .sticker-button:hover {
+        @apply scale-105 -rotate-1;
+        box-shadow: 
+            6px 6px 0px 0px #1A1A1B,
+            0 0 20px rgba(255, 45, 171, 0.3);
+    }
+    
+    /* Variant glow effects */
+    .sticker-button.bg-secondary:hover {
+        box-shadow: 
+            6px 6px 0px 0px #1A1A1B,
+            0 0 20px rgba(0, 240, 255, 0.4);
+    }
+    
+    .sticker-button.bg-accent:hover {
+        box-shadow: 
+            6px 6px 0px 0px #1A1A1B,
+            0 0 20px rgba(255, 240, 31, 0.4);
+    }
+    
+    .sticker-button.bg-ink:hover {
+        box-shadow: 
+            6px 6px 0px 0px #1A1A1B,
+            0 0 20px rgba(255, 45, 171, 0.3);
     }
 
     .grain-overlay {
-        @apply fixed inset-0 pointer-events-none z-[9999] opacity-[0.03];
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Cfilter id='noiseFilter'%3%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3%3C/filter%3%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3%3C/svg%3");
+        @apply fixed inset-0 pointer-events-none z-[9999] opacity-[0.025];
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    
+    /* Decorative blob backgrounds */
+    .blob-decoration {
+        @apply absolute pointer-events-none opacity-30 blur-3xl;
+        border-radius: 50%;
+        filter: blur(80px);
     }
 }
 
 @layer utilities {
     .text-stroke-ink {
         -webkit-text-stroke: 2px var(--color-ink);
+        paint-order: stroke fill;
+    }
+    
+    .text-gradient-primary {
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .text-gradient-accent {
+        background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     .squish-hover {
@@ -63,6 +150,70 @@
 
     .squish-hover:hover {
         animation: squish 0.4s ease-out forwards;
+    }
+    
+    /* Wobble animation for playful interactions */
+    .wobble-hover {
+        @apply transition-transform;
+    }
+    
+    .wobble-hover:hover {
+        animation: wobble 0.5s ease-in-out;
+    }
+    
+    /* Pop entrance animation */
+    .pop-in {
+        animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        opacity: 0;
+    }
+    
+    /* Staggered entrance delays */
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+    .delay-500 { animation-delay: 500ms; }
+    
+    /* Float animation for decorative elements */
+    .float {
+        animation: float 6s ease-in-out infinite;
+    }
+    
+    .float-slow {
+        animation: float 8s ease-in-out infinite;
+    }
+    
+    /* Pulse glow effect */
+    .pulse-glow {
+        animation: pulseGlow 2s ease-in-out infinite;
+    }
+    
+    /* Shine effect for cards */
+    .shine-effect {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .shine-effect::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%
+        );
+        transform: rotate(30deg) translateX(-100%);
+        transition: transform 0.6s ease;
+        pointer-events: none;
+    }
+    
+    .shine-effect:hover::after {
+        transform: rotate(30deg) translateX(100%);
     }
 }
 
@@ -77,6 +228,44 @@
 
     100% {
         transform: scale(1.1);
+    }
+}
+
+@keyframes wobble {
+    0%, 100% { transform: rotate(0deg); }
+    15% { transform: rotate(-5deg); }
+    30% { transform: rotate(4deg); }
+    45% { transform: rotate(-3deg); }
+    60% { transform: rotate(2deg); }
+    75% { transform: rotate(-1deg); }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(3deg);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 45, 171, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 45, 171, 0.5);
     }
 }
 

@@ -1,20 +1,26 @@
 ---
-
+import BobaPhysics from "./BobaPhysics.astro";
 ---
 
 <div
     class="relative w-full max-w-lg mx-auto lg:ml-auto select-none"
     id="hero-cup-container"
 >
+    <!-- Atmospheric Background Blobs -->
+    <div class="absolute -inset-10 pointer-events-none overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-40 h-40 bg-primary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-32 h-32 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+    </div>
+    
     <!-- Background Sparkles (Stickers) -->
     <div
-        class="absolute -top-10 -left-10 w-24 h-24 bg-accent border-3 border-ink rounded-full flex items-center justify-center -rotate-12 animate-bounce shadow-hard"
+        class="absolute -top-10 -left-10 w-24 h-24 bg-accent border-3 border-ink rounded-full flex items-center justify-center -rotate-12 shadow-hard float z-10"
     >
         <span class="font-heading text-xl">NEW!</span>
     </div>
 
     <div
-        class="absolute -bottom-5 -right-5 w-20 h-20 bg-secondary border-3 border-ink rounded-squircle flex items-center justify-center rotate-12 animate-pulse shadow-hard"
+        class="absolute -bottom-5 -right-5 w-20 h-20 bg-secondary border-3 border-ink rounded-squircle flex items-center justify-center rotate-12 shadow-hard float-slow z-10"
     >
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -33,13 +39,22 @@
             ></path><path d="M12 7V3"></path><path d="M8 3h8"></path></svg
         >
     </div>
+    
+    <!-- Additional floating sticker -->
+    <div
+        class="absolute top-1/3 -right-8 w-16 h-16 bg-primary border-3 border-ink rounded-full flex items-center justify-center rotate-6 shadow-hard-sm float z-10"
+        style="animation-delay: 0.5s;"
+    >
+        <span class="font-heading text-sm">POP!</span>
+    </div>
 
     <!-- The Cup SVG -->
     <svg
         viewBox="0 0 400 600"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        class="w-full h-auto drop-shadow-[10px_10px_0px_rgba(26,26,27,1)] transition-transform hover:scale-[1.02] duration-500"
+        class="w-full h-auto drop-shadow-[10px_10px_0px_rgba(26,26,27,1)] transition-transform hover:scale-[1.02] duration-500 relative z-0"
+        id="hero-cup-svg"
     >
         <!-- Liquid Defs -->
         <defs>
@@ -56,6 +71,14 @@
                 <stop offset="0%" stop-color="#FF2DAB"></stop>
                 <stop offset="100%" stop-color="#1A1A1B"></stop>
             </linearGradient>
+            <!-- Glow filter -->
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
         </defs>
 
         <!-- Cup Body Shadow (Hard) -->
@@ -211,10 +234,45 @@
             transform: rotate(-5deg) translate(-2px, 2px);
         }
     }
+    
+    @keyframes pulse-slow {
+        0%, 100% {
+            opacity: 0.2;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.3;
+            transform: scale(1.1);
+        }
+    }
+    
+    .animate-pulse-slow {
+        animation: pulse-slow 4s ease-in-out infinite;
+    }
+    
+    /* Cup entrance animation */
+    #hero-cup-svg {
+        animation: cupEntrance 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    
+    @keyframes cupEntrance {
+        0% {
+            opacity: 0;
+            transform: translateY(40px) scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
 
     @media (prefers-reduced-motion: reduce) {
         .pearl,
-        .ice {
+        .ice,
+        .float,
+        .float-slow,
+        .animate-pulse-slow,
+        #hero-cup-svg {
             animation: none;
         }
     }
