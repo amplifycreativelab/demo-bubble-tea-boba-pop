@@ -1,4 +1,4 @@
-﻿---
+---
 const mainSiteUrl = "https://amplifycreativelab.com";
 const logoUrl =
   "https://amplifycreativelab.com/images/logo/amplify-creative-lab-logo-perth-WA.svg";
@@ -67,44 +67,55 @@ const logoUrl =
 
     <!-- Content -->
     <div class="demo-modal__body">
-      <p class="demo-modal__eyebrow" id="demo-modal-heading">Concept Demo</p>
-      <h2 class="demo-modal__title">Built by Amplify Creative Lab</h2>
+      <p class="demo-modal__eyebrow" id="demo-modal-heading">
+        Concept demo by Amplify Creative Lab
+      </p>
+      <h2 class="demo-modal__title">
+        Imagine your brand with this much energy.
+      </h2>
       <p class="demo-modal__desc">
-        A non-indexed portfolio demo showcasing a high-performance Astro build
-        with motion-first design. No real services are offered here.
+        Boba Pop! is a fictional bubble-tea shop we designed end-to-end: the
+        branding, the copy, the motion. It shows what a bold, lightning-fast
+        website can do for a local business. Tap around, try the drink builder,
+        then picture your business getting the same treatment.
       </p>
 
-      <ul class="demo-modal__tags" aria-label="Tech highlights">
-        <li>Astro</li>
+      <ul class="demo-modal__tags" aria-label="What went into this demo">
+        <li>Custom design</li>
         <li>Motion-first</li>
-        <li>Tailwind CSS</li>
-        <li>Performance-optimised</li>
+        <li>Sub-second loads</li>
+        <li>Mobile-first</li>
       </ul>
     </div>
 
-    <!-- CTA -->
-    <a
-      class="demo-modal__cta"
-      href={mainSiteUrl}
-      target="_blank"
-      rel="nofollow noopener noreferrer"
-    >
-      Visit amplifycreativelab.com
-      <svg
-        width="13"
-        height="13"
-        viewBox="0 0 14 14"
-        fill="none"
-        aria-hidden="true"
+    <!-- CTAs -->
+    <div class="demo-modal__actions">
+      <a
+        class="demo-modal__cta"
+        href={mainSiteUrl}
+        target="_blank"
+        rel="nofollow noopener noreferrer"
       >
-        <path
-          d="M2.5 7h9M8 3.5L11.5 7 8 10.5"
-          stroke="currentColor"
-          stroke-width="1.4"
-          stroke-linecap="round"
-          stroke-linejoin="round"></path>
-      </svg>
-    </a>
+        Get a site like this
+        <svg
+          width="13"
+          height="13"
+          viewBox="0 0 14 14"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M2.5 7h9M8 3.5L11.5 7 8 10.5"
+            stroke="currentColor"
+            stroke-width="1.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </a>
+      <button class="demo-modal__secondary" id="demo-modal-explore" type="button">
+        Explore the demo first
+      </button>
+    </div>
   </div>
 </div>
 
@@ -185,9 +196,9 @@ const logoUrl =
     position: fixed;
     inset: 0;
     z-index: 9100;
-    background: rgba(14, 10, 8, 0.38);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    background: rgba(14, 10, 8, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     opacity: 0;
     pointer-events: none;
     transition: opacity 300ms ease;
@@ -198,30 +209,30 @@ const logoUrl =
     pointer-events: auto;
   }
 
-  /* ─────────────────── Modal ─────────────────── */
+  /* ─────────────────── Modal — centered ─────────────────── */
   .demo-modal {
     /* Plain div — we control visibility entirely with CSS */
     display: block;
     position: fixed;
     z-index: 9200;
-    bottom: 20px;
-    right: 20px;
-    width: min(360px, calc(100vw - 32px));
+    top: 50%;
+    left: 50%;
+    width: min(540px, calc(100vw - 32px));
 
-    border-radius: 20px;
+    border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.55);
-    background: rgba(252, 249, 244, 0.96);
+    background: rgba(252, 249, 244, 0.97);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
     box-shadow:
-      0 24px 60px rgba(0, 0, 0, 0.18),
-      0 6px 20px rgba(0, 0, 0, 0.1),
+      0 32px 80px rgba(0, 0, 0, 0.28),
+      0 8px 24px rgba(0, 0, 0, 0.12),
       inset 0 1px 0 rgba(255, 255, 255, 0.8);
     overflow: hidden;
 
     /* Closed state */
     opacity: 0;
-    transform: translateY(16px) scale(0.95);
+    transform: translate(-50%, -50%) translateY(16px) scale(0.95);
     pointer-events: none;
     visibility: hidden;
     transition:
@@ -232,7 +243,7 @@ const logoUrl =
 
   .demo-modal.is-open {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate(-50%, -50%) translateY(0) scale(1);
     pointer-events: auto;
     visibility: visible;
     transition:
@@ -244,10 +255,11 @@ const logoUrl =
   /* ─── Close button — large, obvious ─── */
   .demo-modal__close {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
+    top: 14px;
+    right: 14px;
+    z-index: 1;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -273,62 +285,67 @@ const logoUrl =
 
   /* ─── Inner scroll wrapper ─── */
   .demo-modal__inner {
-    max-height: min(90dvh, 560px);
+    max-height: min(88dvh, 640px);
     overflow-y: auto;
   }
 
   /* ─── Logo ─── */
   .demo-modal__logo-wrap {
-    padding: 28px 28px 0;
+    padding: 36px 36px 0;
     display: flex;
     justify-content: center;
   }
 
   .demo-modal__logo {
     display: block;
-    width: 200px;
+    width: 220px;
     height: auto;
-    /* No background, no border — popup surface provides the contrast */
   }
 
   /* ─── Body ─── */
   .demo-modal__body {
-    padding: 18px 28px 0;
+    padding: 24px 36px 0;
+    text-align: center;
   }
 
   .demo-modal__eyebrow {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #9a7b5c;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
   }
 
   .demo-modal__title {
     font-family: "Playfair Display", serif;
-    font-size: 19px;
+    font-size: 26px;
     font-weight: 500;
     line-height: 1.25;
     color: #1e2022;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    -webkit-text-stroke: 0;
+    text-transform: none;
+    letter-spacing: normal;
   }
 
   .demo-modal__desc {
-    font-size: 13.5px;
-    line-height: 1.7;
-    color: rgba(30, 32, 34, 0.62);
-    margin-bottom: 14px;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: rgba(30, 32, 34, 0.65);
+    margin: 0 auto 18px;
+    max-width: 42ch;
     font-weight: 300;
   }
 
   .demo-modal__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    justify-content: center;
+    gap: 6px;
     list-style: none;
     padding: 0;
-    margin: 0 0 22px;
+    margin: 0 0 26px;
   }
 
   .demo-modal__tags li {
@@ -340,21 +357,27 @@ const logoUrl =
     background: rgba(78, 88, 70, 0.09);
     border: 1px solid rgba(78, 88, 70, 0.18);
     border-radius: 100px;
-    padding: 4px 11px;
+    padding: 5px 12px;
   }
 
-  /* ─── CTA ─── */
+  /* ─── CTAs ─── */
+  .demo-modal__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 36px 32px;
+  }
+
   .demo-modal__cta {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin: 0 28px 28px;
-    padding: 13px 20px;
-    border-radius: 10px;
+    padding: 15px 20px;
+    border-radius: 12px;
     background: #162719;
     color: rgba(255, 255, 255, 0.92);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.05em;
     text-decoration: none;
@@ -368,6 +391,30 @@ const logoUrl =
     transform: translateY(-1px);
   }
 
+  .demo-modal__secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: transparent;
+    color: rgba(30, 32, 34, 0.6);
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition:
+      background 180ms,
+      color 180ms;
+  }
+
+  .demo-modal__secondary:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(30, 32, 34, 0.85);
+  }
+
   /* ─── Dark mode ─── */
   @media (prefers-color-scheme: dark) {
     .demo-pill__btn {
@@ -378,14 +425,14 @@ const logoUrl =
 
     .demo-modal {
       border-color: rgba(255, 255, 255, 0.1);
-      background: rgba(22, 18, 12, 0.96);
+      background: rgba(22, 18, 12, 0.97);
     }
 
     .demo-modal__title {
       color: rgba(255, 255, 255, 0.9);
     }
     .demo-modal__desc {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.55);
     }
 
     .demo-modal__close {
@@ -401,6 +448,18 @@ const logoUrl =
 
     .demo-modal__logo {
       background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 10px 14px;
+    }
+
+    .demo-modal__secondary {
+      border-color: rgba(255, 255, 255, 0.14);
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .demo-modal__secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.85);
     }
   }
 
@@ -410,11 +469,25 @@ const logoUrl =
       right: 14px;
       bottom: 14px;
     }
-    .demo-modal {
-      bottom: 74px;
-      right: 14px;
-      left: 14px;
-      width: auto;
+
+    .demo-modal__logo-wrap {
+      padding: 28px 24px 0;
+    }
+
+    .demo-modal__logo {
+      width: 180px;
+    }
+
+    .demo-modal__body {
+      padding: 20px 24px 0;
+    }
+
+    .demo-modal__title {
+      font-size: 22px;
+    }
+
+    .demo-modal__actions {
+      padding: 0 24px 26px;
     }
   }
 
@@ -442,6 +515,9 @@ const logoUrl =
     const closeBtn = document.getElementById(
       "demo-modal-close",
     ) as HTMLButtonElement | null;
+    const exploreBtn = document.getElementById(
+      "demo-modal-explore",
+    ) as HTMLButtonElement | null;
 
     if (!pill || !trigger || !backdrop || !modal || !closeBtn) return;
 
@@ -454,7 +530,6 @@ const logoUrl =
       modal.removeAttribute("aria-hidden");
       modal.removeAttribute("inert");
       trigger.setAttribute("aria-expanded", "true");
-      // Don't lock scroll — the modal is non-intrusive
       // Focus the close button for keyboard users
       setTimeout(() => closeBtn.focus({ preventScroll: true }), 50);
     };
@@ -475,10 +550,10 @@ const logoUrl =
 
     trigger.addEventListener("click", () => (isOpen() ? close() : open()));
     closeBtn.addEventListener("click", close);
+    exploreBtn?.addEventListener("click", close);
     backdrop.addEventListener("click", close);
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && isOpen()) close();
     });
   })();
 </script>
-

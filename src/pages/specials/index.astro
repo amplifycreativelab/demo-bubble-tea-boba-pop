@@ -2,10 +2,10 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
-import StickerCard from "../../components/StickerCard.astro";
 import StickerButton from "../../components/StickerButton.astro";
 import { specials } from "../../data/specials";
 import { Image } from "astro:assets";
+import { Zap } from "lucide-preact";
 
 const baseUrl = import.meta.env.BASE_URL;
 ---
@@ -16,9 +16,9 @@ const baseUrl = import.meta.env.BASE_URL;
 >
     <Header />
 
-    <main class="py-20">
+    <main class="py-16 md:py-24">
         <section class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-20 space-y-6">
+            <div class="text-center mb-16 md:mb-24 space-y-6">
                 <h1 class="text-7xl md:text-9xl text-stroke-ink">
                     LIMITED DROPS
                 </h1>
@@ -50,7 +50,7 @@ const baseUrl = import.meta.env.BASE_URL;
                                 </div>
                             </div>
 
-                            <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                            <div class="md:w-1/2 p-7 md:p-8 lg:p-10 flex flex-col justify-between">
                                 <div class="space-y-4">
                                     <h3 class="text-5xl leading-none">
                                         {special.title}
@@ -67,9 +67,9 @@ const baseUrl = import.meta.env.BASE_URL;
                                     <StickerButton
                                         href={`${baseUrl}order`}
                                         variant="primary"
-                                        class="w-full text-xl py-4"
+                                        class="w-full text-xl py-4 gap-2"
                                     >
-                                        GRAB IT NOW
+                                        <Zap size={20} /> GRAB IT NOW
                                     </StickerButton>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@ const baseUrl = import.meta.env.BASE_URL;
 
             <!-- Teaser -->
             <div
-                class="mt-32 text-center p-20 bg-ink text-white rounded-squircle shadow-hard-lg"
+                class="mt-24 md:mt-36 text-center px-8 py-16 md:p-20 bg-ink text-white rounded-squircle shadow-hard-lg"
             >
                 <h3 class="font-heading text-6xl mb-6 text-secondary">
                     NEXT DROP LOADING...

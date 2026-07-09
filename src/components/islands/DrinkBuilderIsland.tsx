@@ -21,7 +21,7 @@ export default function DrinkBuilderIsland() {
     };
 
     return (
-        <div className="bg-white border-3 border-ink rounded-squircle p-8 shadow-hard grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="bg-white border-3 border-ink rounded-squircle p-6 sm:p-8 lg:p-10 shadow-hard grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
             <div className="space-y-10">
                 <div>
                     <h3 className="text-4xl mb-6 flex items-center gap-3">

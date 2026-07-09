@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import logo from "../assets/images/logo/logo.webp";
 import StickerButton from "./StickerButton.astro";
 
 const baseUrl = import.meta.env.BASE_URL;
@@ -15,20 +17,24 @@ const navLinks = [
     class="fixed top-0 left-0 right-0 z-[10000] px-4 py-4 transition-transform duration-300"
 >
     <nav
-        class="max-w-7xl mx-auto flex items-center justify-between bg-white/95 backdrop-blur-sm border-3 border-ink rounded-squircle px-6 py-3 shadow-hard relative overflow-hidden"
+        class="max-w-7xl mx-auto flex items-center justify-between bg-white/95 backdrop-blur-sm border-3 border-ink rounded-squircle px-4 sm:px-6 py-3 shadow-hard relative"
     >
         <!-- Decorative gradient background -->
-        <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 pointer-events-none rounded-squircle"></div>
         
-        <a href={baseUrl} class="flex items-center gap-2 group relative z-10">
-            <div
-                class="w-10 h-10 bg-primary border-3 border-ink rounded-full flex items-center justify-center font-heading text-2xl text-ink shadow-hard-sm group-hover:-rotate-12 group-hover:scale-110 transition-all duration-300"
-            >
-                B
-            </div>
-            <span class="font-heading text-2xl tracking-tighter text-stroke-ink group-hover:text-primary transition-colors duration-300"
-                >BOBA POP!</span
-            >
+        <a
+            href={baseUrl}
+            class="flex items-center group relative z-10 shrink-0"
+            aria-label="Boba Pop! home"
+        >
+            <Image
+                src={logo}
+                alt="Boba Pop! Bubble Tea"
+                width={224}
+                height={224}
+                class="h-20 md:h-28 w-auto -my-5 md:-my-8 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300 drop-shadow-md"
+                loading="eager"
+            />
         </a>
 
         <!-- Desktop Nav -->
@@ -51,7 +57,7 @@ const navLinks = [
             <StickerButton
                 href={`${baseUrl}order`}
                 variant="accent"
-                class="hidden sm:flex text-sm py-2 px-4"
+                class="flex text-sm py-2 px-3 sm:px-4"
             >
                 ORDER NOW
             </StickerButton>
@@ -216,12 +222,6 @@ const navLinks = [
 
         toggle?.addEventListener("click", (e) => {
             e.stopPropagation();
-            toggleMenu();
-        });
-
-        // Listen for global menu toggle events (e.g. from MobileActionBar)
-        window.addEventListener("boba:toggle-menu", () => {
-            console.log("Boba Pop: Received global toggle event");
             toggleMenu();
         });
 

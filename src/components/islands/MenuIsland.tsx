@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'preact/hooks';
 import type { Product } from '../../data/products';
-import { Search, Filter, Star, Zap, Leaf, Check } from 'lucide-preact';
+import { Search, Star, Zap, Leaf, Check, Plus } from 'lucide-preact';
 
 // Define UI-specific Product type where image is a resolved string URL
 export interface UIProduct extends Omit<Product, 'image'> {
@@ -43,7 +43,7 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
     return (
         <div className="space-y-12">
             {/* Controls */}
-            <div className="bg-white border-3 border-ink rounded-squircle p-3 lg:p-8 shadow-hard sticky top-24 z-30">
+            <div className="bg-white border-3 border-ink rounded-squircle p-4 lg:p-8 shadow-hard sticky top-24 z-30">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
                     {/* Search */}
                     <div>
@@ -93,7 +93,7 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
             </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                 {filteredProducts.map((product, idx) => (
                     <div
                         key={product.id}
@@ -121,15 +121,15 @@ export default function MenuIsland({ initialProducts, baseUrl }: Props) {
                             )}
                         </div>
 
-                        <div className="p-6 flex flex-col flex-grow bg-white">
-                            <div className="flex justify-between items-start mb-4">
+                        <div className="p-7 lg:p-8 flex flex-col flex-grow bg-white">
+                            <div className="flex justify-between items-start gap-4 mb-4">
                                 <h3 className="text-3xl leading-none">{product.name}</h3>
-                                <span className="font-heading text-2xl text-primary">${product.price.toFixed(2)}</span>
+                                <span className="font-heading text-2xl text-primary shrink-0">${product.price.toFixed(2)}</span>
                             </div>
-                            <p className="font-body text-sm opacity-70 mb-6 flex-grow">{product.description}</p>
+                            <p className="font-body text-sm opacity-70 leading-relaxed mb-8 flex-grow">{product.description}</p>
 
-                            <button className="w-full bg-ink text-white font-heading text-xl py-3 rounded-xl border-3 border-ink shadow-hard-sm hover:-translate-y-1 hover:shadow-hard transition-all active:translate-y-0.5 active:shadow-none">
-                                ADD TO POP!
+                            <button className="w-full bg-ink text-white font-heading text-xl py-3.5 rounded-xl border-3 border-ink shadow-hard-sm hover:-translate-y-1 hover:shadow-hard transition-all active:translate-y-0.5 active:shadow-none flex items-center justify-center gap-2">
+                                <Plus size={20} /> ADD TO POP!
                             </button>
                         </div>
                     </div>

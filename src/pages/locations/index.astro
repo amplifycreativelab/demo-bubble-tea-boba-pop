@@ -16,9 +16,9 @@ const baseUrl = import.meta.env.BASE_URL;
 >
     <Header />
 
-    <main class="py-20">
+    <main class="py-16 md:py-24">
         <section class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-20 space-y-6">
+            <div class="text-center mb-16 md:mb-24 space-y-6">
                 <h1 class="text-7xl md:text-9xl text-stroke-ink">FIND US</h1>
                 <p
                     class="font-body text-xl md:text-2xl opacity-60 max-w-2xl mx-auto font-bold uppercase tracking-widest"
@@ -27,7 +27,7 @@ const baseUrl = import.meta.env.BASE_URL;
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                 {
                     locations.map((loc) => (
                         <StickerCard
@@ -85,7 +85,7 @@ const baseUrl = import.meta.env.BASE_URL;
 
             <!-- Areas we serve -->
             <div
-                class="mt-32 p-12 bg-white border-3 border-ink rounded-squircle shadow-hard text-center"
+                class="mt-24 md:mt-36 p-8 md:p-14 bg-white border-3 border-ink rounded-squircle shadow-hard text-center"
             >
                 <h4 class="font-heading text-4xl mb-6">AREAS WE SERVE</h4>
                 <p class="font-body text-lg opacity-70 mb-8 max-w-2xl mx-auto">
